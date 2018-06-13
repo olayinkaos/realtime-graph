@@ -1,0 +1,64 @@
+<!-- ./templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CryptoLiveChart!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <style>
+        .chart {
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title">Welcome to <strong>Crypto</strong>LiveChart!</h1>
+        <p class="subtitle">View live prices for <strong>Bitcoin</strong> and <strong>Ethereum</strong> in real time!</p>
+        <hr>
+        <div class="columns">
+            <div class="column">
+                <h5 class="title is-6">Prices (in USD)</h5>
+                <div id="price_chart" class="chart">
+                    Graph
+                </div>
+            </div>
+            <div class="column">
+                <h5 class="title is-6">Market Cap</h5>
+                <div id="market_cap_chart" class="chart">
+                    Bar Chart
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+    <!-- import Pusher-js library -->
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script type="text/javascript">
+      // connect to Pusher
+      const pusher = new Pusher('YOUR_APP_KEY', {
+        cluster: 'YOUR_APP_CLUSTER', // gotten from Pusher app dashboard
+        encrypted: true // optional
+      });
+      // subscribe to crypto channel
+      const channel = pusher.subscribe('crypto')
+      // listen for relevant events
+      channel.bind('data-updated', data => {
+          const graph = JSON.parse(data.graph);
+          Plotly.newPlot('price_chart', graph);
+          const bar_chart = JSON.parse(data.bar_chart);
+          Plotly.newPlot('market_cap_chart', bar_chart);
+      });
+    </script>
+</body>
+</html>
