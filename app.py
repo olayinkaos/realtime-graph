@@ -61,8 +61,8 @@ def retrieve_data():
         )]
 
     data = {
-    'graph': json.dumps(graph_data, cls=plotly.utils.PlotlyJSONEncoder),
-    'bar_chart': json.dumps(bar_chart_data, cls=plotly.utils.PlotlyJSONEncoder)
+        'graph': json.dumps(list(graph_data), cls=plotly.utils.PlotlyJSONEncoder),
+        'bar_chart': json.dumps(list(bar_chart_data), cls=plotly.utils.PlotlyJSONEncoder)
     }
 
     # trigger event
