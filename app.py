@@ -57,7 +57,7 @@ def retrieve_data():
     # create an array of traces for bar chart data
     bar_chart_data = [go.Bar(
         x=currencies,
-        y=current_prices.values()
+        y=list(current_prices.values())
         )]
 
     data = {
