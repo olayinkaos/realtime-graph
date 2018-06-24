@@ -1,5 +1,5 @@
 # Flask Realtime Graph
-Flask Realtime Graph built with Plotly and Pusher
+Flask Realtime Graph built with Plotly and Pusher. You can view the tutorial [here](https://pusher.com/tutorials/bitcoin-live-graph-python).
 
 ## Getting Started
 To run locally:
